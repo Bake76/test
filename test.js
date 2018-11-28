@@ -28,3 +28,11 @@
 // document.write(message);
 
 
+var unten = parseInt(prompt("Geben Sie eine Zahl ein"));
+var oben = parseInt(prompt("Geben Sie noch eine Zahl ein"));
+for (i = 1; i <= oben; i++) {
+   var zahl = Math.random() * (oben - unten + 1) + unten;
+   var zahlRund = Math.floor(zahl);
+   console.log(zahlRund);
+}
+
