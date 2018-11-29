@@ -1,38 +1,176 @@
+function wortSpiel() {
+   var nomen;
+   var verb;
+   var adjektiv;
 
-// var nomen;
-// var verb;
-// var adjektiv;
+   function abfrage(wort) {
+      var ergebnis = prompt("Gib ein " + wort + " ein");
+      return ergebnis;
+   }
 
-// function abfrage(wort) {
-//    var ergebnis = prompt("Gib ein " + wort + " ein");
-//    return ergebnis;
-// }
+   for (i = 3; i > 0; i--) {
+      switch (i) {
+         case 3:
+            nomen = abfrage("Nomen");
+            break;
+         case 2:
+            verb = abfrage("Verb");
+            break;
+         default:
+            adjektiv = abfrage("Adjektiv");
+      }
+   }
 
-// for (i = 3; i > 0; i--) {
-//    switch (i) {
-//       case 3: 
-//          nomen = abfrage("Nomen");
-//          break;
-//       case 2:
-//          verb = abfrage("Verb");
-//          break;
-//       default:
-//          adjektiv = abfrage("Adjektiv");
-//    }
-// }
+   message = "Nomen: " + nomen + "<br>";
+   message += "Verb: " + verb + "<br>";
+   message += "Adjektiv: " + adjektiv;
 
-// message = "Nomen: " + nomen + "<br>";
-// message += "Verb: " + verb + "<br>";
-// message += "Adjektiv: " + adjektiv;
-
-// document.write(message);
-
-
-var unten = parseInt(prompt("Geben Sie eine Zahl ein"));
-var oben = parseInt(prompt("Geben Sie noch eine Zahl ein"));
-for (i = 1; i <= oben; i++) {
-   var zahl = Math.random() * (oben - unten + 1) + unten;
-   var zahlRund = Math.floor(zahl);
-   console.log(zahlRund);
+   document.write(message);
 }
 
+
+
+/****** Zahlen raten ******/
+function zahlenRaten() {
+   function createNumber() {
+      var randomNumber = Math.random() * 10 + 1;
+      var randomNumber = Math.floor(randomNumber);
+      // var randomNumber = 2;
+      return randomNumber;
+   }
+
+
+   function askUser(i) {
+      if (i === 1) {
+         var geraten = parseInt(prompt("Geben Sie eine Zahl zwischen 1 und 10 ein. Sie haben noch " + i + " Versuch"));
+      } else {
+         var geraten = parseInt(prompt("Geben Sie eine Zahl zwischen 1 und 10 ein. Sie haben noch " + i + " Versuche"));
+      }
+      //auf Zahl checken
+      while (isNaN(geraten)) {
+         geraten = parseInt(prompt("Geben Sie eine ZAHL!!! zwischen 1 und 10 ein. Sie haben noch " + i + " Versuche"));
+      }
+
+      return geraten;
+   }
+
+   function checkInput(geraten, randomNumber) {
+      var ergebnis = false;
+      if (geraten < randomNumber) {
+         alert("Leider daneben, die Zahl ist höher");
+      }
+      else if (geraten > randomNumber) {
+         alert("Leider daneben, die Zahl ist kleiner");
+      }
+      else {
+         ergebnis = true;
+      }
+      return ergebnis;
+   }
+
+
+   function tellUser(ergebnis, randomNumber) {
+      if (ergebnis) {
+         var message = "Richtig geraten!!!";
+      } else {
+         var message = "Sie haben die Zahl leider nicht erraten. Die Zahl war " + randomNumber;
+      }
+      return message;
+   }
+
+
+   do {
+      var randomNumber = createNumber();
+
+      for (i = 3; i >= 1; i--) {
+         var ergebnis = false;
+
+         var geraten = askUser(i);
+
+         var ergebnis = checkInput(geraten, randomNumber);
+
+         if (ergebnis) {
+            i = 0;  // beendet Schleife
+         }
+      }
+
+      alert(tellUser(ergebnis, randomNumber));
+      var spielen = prompt("Noch einmal (j/n)?");
+   }
+   while (spielen === "j")
+}
+
+
+// Rechenaufgaben lösen
+function mathBasic() {
+   function createNumbers() {
+      var number = Math.random() * 10 + 1;
+      var number = Math.floor(number)
+      return number;
+   }
+
+
+   function rechne(zahl1, zahl2, operator) {
+      var ergebnis;
+      var str = zahl1 + operator + zahl2;
+
+      if (operator === "/") {
+         ergebnis = Math.floor(eval(str));
+      }
+      else {
+         ergebnis = eval(str);
+      }
+
+      return ergebnis;
+   }
+
+   function ausgabe(richtig) {
+      switch (richtig) {
+         case 4:
+            alert("Very good - " + richtig + " / 4 right");
+            break;
+         case 3:
+            alert("Good - " + richtig + " / 4 right");
+            break;
+         default:
+            alert("You're an idiot - go home");
+      }
+   }
+
+   var richtig = 0;
+   var zahl = new Array();
+   var operator = new Array("+", "-", "*", "/");
+
+   for (i = 0; i <= 3; i++) {
+      for (j = 0; j <= 1; j++) {
+         zahl[j] = createNumbers(); // Array mit 2 Zahlen füllen
+      }
+
+      var geraten = parseInt(prompt("Wie viel ist " + zahl[0] + " " + operator[i] + " " + zahl[1]));
+      var richtigeLoesung = rechne(zahl[0], zahl[1], operator[i]);
+
+      if (geraten == richtigeLoesung) {
+         richtig++;
+      }
+   }
+
+   ausgabe(richtig);
+}
+
+
+/******* Random number from to ********/
+
+function randomNumberScope(unten, oben) {
+   if (isNaN(unten) || isNaN(oben)) {
+      throw new Error("one or more argument in NaN");
+   }
+   else {
+      var number = Math.random() * (oben - unten + 1) + unten;
+      var number = Math.floor(number);
+      return number;
+   }
+}
+
+for (i = 10; i <= 10; i++) {
+   console.log(randomNumberScope("hallo", 6));
+}
