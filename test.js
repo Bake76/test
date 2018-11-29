@@ -171,6 +171,42 @@ function randomNumberScope(unten, oben) {
    }
 }
 
-for (i = 10; i <= 10; i++) {
-   console.log(randomNumberScope("hallo", 6));
+
+
+function createColorDivs() {
+
+   function createNumber() {
+      var number = Math.floor(Math.random() * 256 + 1);
+      return number;
+   }
+
+   function generateRGB() {
+
+      var rgb = new Array();
+
+      //darf nicht i sein, sonst Endlosschleife (nimmt i von global)
+      for (j = 0; j < 3; j++) {
+         rgb[j] = createNumber();
+      }
+
+      var color = "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+
+      return color;
+   }
+
+   var html = "";
+
+   for (i = 1; i <= 10; i++) {
+      var color = generateRGB();
+      html += "<div style=\"background-color:" + color + ";\">" + i + "</div>";
+   }
+
+   document.write(html);
 }
+
+var test = [1, 2, 3, 4, 5];
+document.write(test);
+test.push(6, 7, 8);
+document.write(test);
+test.unshift(-1, 0);
+document.write(test);
