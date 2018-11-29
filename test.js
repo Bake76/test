@@ -204,9 +204,100 @@ function createColorDivs() {
    document.write(html);
 }
 
-var test = [1, 2, 3, 4, 5];
-document.write(test);
-test.push(6, 7, 8);
-document.write(test);
-test.unshift(-1, 0);
-document.write(test);
+
+/* Array Stuff */
+
+function createArray(length) {
+   
+   var newArray = [];
+
+   for (i = 0; i < length; i++) {
+      newArray[i] = i + 1;
+   }
+
+   return newArray;
+
+}
+
+
+function pushItems(array, number) {
+
+   for (i = 1; i <= number; i++) {
+      array.push(i);   
+   }
+
+   return array;
+}
+
+
+function popItems(array, number) {
+   
+   var popped = [];
+
+   for (i = 0; i < number; i++) {
+      popped[i] = array.pop();
+   }
+
+   console.log(popped);
+   return array;
+}
+
+
+function unshiftItems(array, number) {
+   
+   for (i = 1; i <= number; i++) {
+      array.unshift(i);
+   }
+   
+   return array;
+}
+
+
+function shiftItems(array, number) {
+
+   var shifted = [];
+
+   for (i = 0; i < number; i++) {
+      shifted[i] = array.shift();
+   }
+
+   console.log(shifted);
+   return array;
+}
+
+
+function pushShift(array, number) {
+   var shifted = [];
+
+   for (i = 0; i < number; i++) {
+      array.push(i + 1);
+      shifted[i] = array.shift(i);
+   }
+
+   console.log(shifted);
+   return array;
+}
+
+
+function unshiftPop(array, number) {
+   var popped = [];
+   
+   for (i = 0; i < number; i++) {
+      array.unshift(i + 1);
+      popped[i] = array.pop();
+   }
+   
+   console.log(popped);
+   return array;
+}
+
+
+function printArray(array) {
+
+   for (i = 0; i < array.length; i++) {
+      console.log(array[i]);
+   }
+}
+
+var test = createArray(10);
+
